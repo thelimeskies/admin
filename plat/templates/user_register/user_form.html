@@ -11,7 +11,7 @@
     {{form.password|as_crispy_field}}
     <div class="row">
         <div class="col-md-4">
-            <button type="button" class="btn btn-success btn-block btn-lg">Scan</button>
+            <button type="button" class="btn btn-success btn-block btn-lg" onclick=ID()>Scan</button>
         </div>
         <div class=" col-md-8">
             {{form.card_id|as_crispy_field}}
@@ -33,12 +33,21 @@
     </div>
 
 </form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script type="text/javascript">
-    function Random() {
-        var items = Array("93 75 8B 16", "37 0A 81 63", "F7 16 7C 62", "F7 16 7C 65", "F7 16 7C 66");
-        var item = items[Math.floor(Math.random() * items.length)];
-        return item;
+    function ID() {
+        let holder = document.getElementById("id_card_id");
+        fetch('/get-id')
+            .then(response => response.json())
+            .then(data => {
+                let { i } = data;
+                holder.value = i;
+                console.log(`holder value = ${holder.value}`);
+
+            })
+            .catch(err => console.log(err.value))
+
     }
-    document.getElementById('id_card_id').value = Random()
 </script>
 {% endblock content %}

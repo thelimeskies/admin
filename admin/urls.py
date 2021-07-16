@@ -28,5 +28,6 @@ urlpatterns = [
     path('<int:id>/', views.user_form, name='user_update'),
     path('delete/<int:id>/', views.user_delete, name='user_delete'),
     # get req. to retrieve and display all records
-    path('list/', views.user_list, name='user_list')
+    path('list/', views.user_list, name='user_list'),
+    path('get-id', views.id, name='get_id')
 ]
